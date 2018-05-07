@@ -25,6 +25,10 @@ string of period-delimited base64 text. This is the local token.
 node translator.js "https://your-gateway-url.mozilla-iot.org" "paste the token here"
 ```
 
+If everything's working, you should be able to visit
+`https://gateway.local:3060` (or `https://localhost:3060`) and see a wall of
+text with the metric numbers.
+
 ## Troubleshooting
 ```
 FetchError: request to https://your-domain-here.mozilla-iot.org/things failed, reason: getaddrinfo ENOTFOUND your-domain-here.mozilla-iot.org your-domain-here.mozilla-iot.org:443

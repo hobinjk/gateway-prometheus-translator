@@ -77,5 +77,5 @@ server.get('/metrics', (req, res) => {
 	res.end(register.metrics());
 });
 
-console.log('Translator listening to 3030, metrics exposed on /metrics endpoint');
-server.listen(3030);
+console.log('Translator listening to 3060, metrics exposed on /metrics endpoint');
+server.listen(3060);

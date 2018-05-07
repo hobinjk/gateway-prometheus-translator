@@ -29,4 +29,4 @@ scrape_configs:
     scrape_interval: 1s
 
     static_configs:
-      - targets: ['localhost:3030']
+      - targets: ['localhost:3060']
