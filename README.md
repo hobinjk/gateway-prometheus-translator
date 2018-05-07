@@ -2,6 +2,12 @@
 
 Translates the Web Thing API into a set of Prometheus metrics.
 
+## The Important Part: Example Graphs
+
+![graph of voltage over time](https://github.com/hobinjk/gateway-prometheus-translator/raw/master/docs/voltage.png)
+
+![graph of power over time](https://github.com/hobinjk/gateway-prometheus-translator/raw/master/docs/power-detail.png)
+
 ## Installing on Raspberry Pi
 ```shell
 cd ~/mozilla-iot
