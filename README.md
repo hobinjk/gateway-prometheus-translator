@@ -47,6 +47,15 @@ This means the JWT you provided is invalid and the gateway is refusing to
 acknowledge it. Try the create new local token process again and make sure
 you're pasting the entire giant string.
 
+## Installing Prometheus
+```bash
+sudo apt install prometheus
+sudo cp prometheus.yml /etc/prometheus/
+sudo systemctl stop prometheus
+sudo rm -r /var/lib/prometheus/metrics
+sudo systemctl start prometheus
+```
+
 ## Permanent Installation
 
 To make the Translator run as a service which starts up every time your Pi
