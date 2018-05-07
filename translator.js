@@ -4,8 +4,8 @@ const WebSocket = require('ws');
 const server = express();
 const {register, Gauge} = require('prom-client');
 
-const gatewayUrl = 'https://your-domain-here.mozilla-iot.org';
-const jwt = 'text.text.and more text';
+const gatewayUrl = process.argv[2] || 'https://your-domain-here.mozilla-iot.org';
+const jwt = process.argv[3] || 'text.text.and more text';
 const headers = {
   Accept: 'application/json',
   Authorization: `Bearer ${jwt}`
