@@ -46,3 +46,9 @@ the URL may be `https://gateway.local`, `https://localhost:4443`,
 This means the JWT you provided is invalid and the gateway is refusing to
 acknowledge it. Try the create new local token process again and make sure
 you're pasting the entire giant string.
+
+## Permanent Installation
+
+To make the Translator run as a service which starts up every time your Pi
+reboots, edit the file `translator.js` with your URL and token then run the
+`./install.sh` script.
