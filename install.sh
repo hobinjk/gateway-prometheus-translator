@@ -27,3 +27,4 @@ sudo systemctl enable mozilla-iot-gateway-prometheus-translator
 sudo systemctl start mozilla-iot-gateway-prometheus-translator
 
 echo "Done! You can now access your translated metrics at http://gateway.local:3060 or http://localhost:3060"
+echo "Make sure you've already added your URL and JWT to translator.js"
