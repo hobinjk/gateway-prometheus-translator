@@ -32,8 +32,8 @@ node translator.js "https://your-gateway-url.mozilla-iot.org" "paste the token h
 ```
 
 If everything's working, you should be able to visit
-`https://gateway.local:3060` (or `https://localhost:3060`) and see a wall of
-text with the metric numbers.
+`https://gateway.local:3060/metrics` (or `https://localhost:3060/metrics`) and
+see a wall of text with the metric numbers.
 
 ## Troubleshooting
 ```
