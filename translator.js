@@ -1,11 +1,27 @@
+/**
+ * Where the translator should look for your data. If you visit this page you
+ * should see the main things list of the Gateway. If running locally, this may
+ * be https://gateway.local, http://gateway.local, https://localhost:4443, or
+ * http://localhost:8080 instead.
+ */
+const yourGatewayUrl = 'https://your-domain-here.mozilla-iot.org';
+
+/**
+ * A JSON Web Token used by the translator to authenticate with the gateway.
+ * Can be issued using the gateway's local token service, accessible from the
+ * Authorizations section of the Settings page.
+ */
+const yourJwt = 'text.text.and more text';
+
 const express = require('express');
 const fetch = require('node-fetch');
 const WebSocket = require('ws');
 const server = express();
 const {register, Gauge} = require('prom-client');
 
-const gatewayUrl = process.argv[2] || 'https://your-domain-here.mozilla-iot.org';
-const jwt = process.argv[3] || 'text.text.and more text';
+const gatewayUrl = process.argv[2] || yourGatewayUrl;
+const jwt = process.argv[3] || yourJwt;
+
 const headers = {
   Accept: 'application/json',
   Authorization: `Bearer ${jwt}`
