@@ -33,6 +33,38 @@ function safeMetricId(thingId, propId) {
   return (thingId + '_' + propId).replace(/[-.]/g, '_');
 }
 
+function addListeners(ws, thingId) {
+  ws.addEventListener('message', function(event) {
+    console.log(event.data);
+    let msg = JSON.parse(event.data);
+    if (msg.messageType === 'propertyStatus') {
+      for (let propId in msg.data) {
+        let metricId = safeMetricId(thingId, propId);
+        let value = msg.data[propId];
+        if (typeof(value) === 'boolean') {
+          value = value ? 1 : 0;
+        }
+        metrics[metricId].set(value);
+      }
+    }
+  });
+
+  function reopen() {
+    let newWs = new WebSocket(ws.url);
+    addListeners(newWs, thingId);
+  }
+
+  ws.addEventListener('close', function() {
+    console.log('reopening in the close');
+    reopen();
+  });
+
+  ws.addEventListener('error', function() {
+    console.log('reopening in the error');
+    reopen();
+  });
+}
+
 fetch(`${gatewayUrl}/things`, {
   headers: headers
 }).then(res => {
@@ -42,6 +74,8 @@ fetch(`${gatewayUrl}/things`, {
     let wsUrl = gatewayUrl.replace('http', 'ws');
     let ws = new WebSocket(`${wsUrl}${thing.href}?jwt=${jwt}`);
     let thingId = thing.href.split('/')[2];
+
+    addListeners(ws, thingId);
 
     for (let propId in thing.properties) {
       let prop = thing.properties[propId];
@@ -69,21 +103,6 @@ fetch(`${gatewayUrl}/things`, {
         console.warn('initial fetch failed', err);
       });
     }
-
-    ws.addEventListener('message', function(event) {
-      console.log(event.data);
-      let msg = JSON.parse(event.data);
-      if (msg.messageType === 'propertyStatus') {
-        for (let propId in msg.data) {
-          let metricId = safeMetricId(thingId, propId);
-          let value = msg.data[propId];
-          if (typeof(value) === 'boolean') {
-            value = value ? 1 : 0;
-          }
-          metrics[metricId].set(value);
-        }
-      }
-    });
   }
 });
 
