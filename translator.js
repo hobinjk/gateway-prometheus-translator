@@ -30,7 +30,10 @@ const headers = {
 const metrics = {};
 
 function safeMetricId(thingId, propId) {
-  return (thingId + '_' + propId).replace(/[-.:;]/g, '_');
+  if (!thingId.match(/^[a-zA-Z_:]/)) {
+    thingId = '_' + thingId;
+  }
+  return (thingId + '_' + propId).replace(/[^a-zA-Z0-9_:]/g, '_');
 }
 
 function addListeners(ws, thingId) {
