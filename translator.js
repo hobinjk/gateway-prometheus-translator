@@ -47,7 +47,11 @@ function addListeners(ws, thingId) {
         if (typeof(value) === 'boolean') {
           value = value ? 1 : 0;
         }
-        metrics[metricId].set(value);
+        try {
+          metrics[metricId].set(value);
+        } catch (e) {
+          console.warn(`setting a value for ${metricId} failed: ${e}`);
+        }
       }
     }
   });
@@ -82,7 +86,11 @@ fetch(`${gatewayUrl}/things`, {
 
     for (let propId in thing.properties) {
       let prop = thing.properties[propId];
-      if (prop.type !== 'boolean' && prop.type !== 'number') {
+      if (
+        prop.type !== 'boolean' &&
+        prop.type !== 'number' &&
+        prop.type !== 'integer'
+      ) {
         continue;
       }
 
