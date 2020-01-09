@@ -100,7 +100,9 @@ fetch(`${gatewayUrl}/things`, {
         help: thing.title + ' property ' + propId
       });
 
-      fetch(`${gatewayUrl}${prop.links[0].href}`, {
+      var link = prop.links.find( ({rel}) => rel === 'property' );
+
+      fetch(`${gatewayUrl}${link.href}`, {
         headers: headers
       }).then(res => {
         return res.json();
