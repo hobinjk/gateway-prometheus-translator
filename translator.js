@@ -97,10 +97,10 @@ fetch(`${gatewayUrl}/things`, {
       let metricId = safeMetricId(thingId, propId);
       metrics[metricId] = new Gauge({
         name: metricId,
-        help: thing.name + ' property ' + propId
+        help: thing.title + ' property ' + propId
       });
 
-      fetch(`${gatewayUrl}${prop.href}`, {
+      fetch(`${gatewayUrl}${prop.links[0].href}`, {
         headers: headers
       }).then(res => {
         return res.json();
