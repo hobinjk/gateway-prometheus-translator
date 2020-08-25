@@ -117,6 +117,9 @@ fetch(`${gatewayUrl}/things`, {
       });
     }
   }
+}).catch(err => {
+  console.error('Unable to contact gateway server', err);
+  process.exit(1);
 });
 
 
